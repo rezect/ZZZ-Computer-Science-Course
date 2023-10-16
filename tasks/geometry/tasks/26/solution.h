@@ -12,6 +12,12 @@ const int COORDINATES_B_X = 30;
 const int COORDINATES_C_Y = 5;
 const int COORDINATES_D_Y = -5;
 const int MAX_ITERATIONS = 50;
+const int THIRTY = 30;
+const int TWENTY_FIVE = 25;
+const int TEN = 10;
+const int THIRTY_FIVE = 35;
+const int ZERO = 0;
+const int ONE = 1;
 
 int Abs(int a) {
     return (a >= 0) ? a : -a;
@@ -49,23 +55,23 @@ int Task() {
     int i = INITIAL_VALUE_I;
     int j = INITIAL_VALUE_J;
     int l = INITIAL_VALUE_L;
-    int Flag_if_xy_not_inside = 0;
+    int flag_if_xy_not_inside = ZERO;
     Point p;
     p.x = i;
     p.y = j;
     for (int k = 1; k <= MAX_ITERATIONS; ++k) {
-        p.x = Abs(Max(Mod(Min(p.x + p.y, p.x + l), 30), Mod(Max(p.x + l, p.y + k), 25)));
-        p.y = Mod(Abs(p.x + k), 10) + Mod(Abs(p.y + k), 10) + Mod(Abs(l + k), 10);
-        l = Mod(p.x * p.x * p.x + p.y * p.y * p.y + l * l * l - k, 35);
+        p.x = Abs(Max(Mod(Min(p.x + p.y, p.x + l), THIRTY), Mod(Max(p.x + l, p.y + k), TWENTY_FIVE)));
+        p.y = Mod(Abs(p.x + k), TEN) + Mod(Abs(p.y + k), TEN) + Mod(Abs(l + k), TEN);
+        l = Mod(p.x * p.x * p.x + p.y * p.y * p.y + l * l * l - k, THIRTY_FIVE);
         if (CheckZone(p)) {
             printf("x = %d, y = %d, l = %d, result = YES, number of iteration = %d\n", p.x, p.y, l, k);
-            Flag_if_xy_not_inside = 1;
+            flag_if_xy_not_inside = ONE;
         } else {
             printf("x = %d, y = %d, l = %d, result = NO\n", p.x, p.y, l);
         }
     }
     // если ни одна точка не находится внутри эллипса, выводим строку
-    if (Flag_if_xy_not_inside == 0) {
+    if (flag_if_xy_not_inside == ZERO) {
     	printf("50 iterations have elapsed and the point has not entered the zone");
     }
     return 0;
